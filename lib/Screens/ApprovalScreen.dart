@@ -1,79 +1,82 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:math';
+import 'ConfirmedScreen.dart';
+import 'MainScreen.dart';
+
+
+String generateRefId() {
+  var random = Random();
+  const String chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  String result = '';
+  for (int i = 0; i < 10; i++) {
+    result += chars[random.nextInt(chars.length)];
+  }
+  return result;
+}
 
 class ApprovalScreen extends StatelessWidget {
 
-  // This widget is the root of your application.
+  String temp = generateRefId();
+  final int cost;
+  ApprovalScreen({
+    required this.cost,
+});
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
 
-        title: Text("FlameOut"),
-        actions: [
-          IconButton(onPressed: (){}, icon: Icon(Icons.notification_important)),
-          IconButton(onPressed: MenuPressed, icon:Icon(Icons.question_mark_rounded)),
-        ],
-        backgroundColor: Colors.red ,
+        title:
+          Text(
+            'OrderConfirmation',
+            style: TextStyle(
+
+            ),
 
 
+        ),
+        centerTitle : true,
+        backgroundColor: Colors.red,
       ),
 
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+            Text(
 
-      body:
+              'Total Cost is : ' + '$cost',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
 
-      Padding(
-        padding: EdgeInsets.only(top: 15),
-        child: SingleChildScrollView(
-          child: Column(
-              children: [
+              ),
+            ),
 
-                Text(
-                  'Help in saving your house',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+          SizedBox(
+            height: 20,
+          ),
 
-                  ),
-                ),
-                SizedBox(
-                  height: 150,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(30.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
+            Text(
+                'Your Ref ID :  ' + '$temp' ,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+            ),
 
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+            ),
 
-                          ),
-                        'Your refrence ID is : '
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 200,
-                ),
-                SizedBox(
-                  height: 5,
-                ),
+        SizedBox(
+          height: 250,
+        ),
 
-                Text(
-                    style: TextStyle(
-                      fontSize: 15,
-                    ),
-                  'The order is expected to take from 3 to 5 days'
-                ),
 
-                SizedBox(
-
-                  height: 30,
-                ),
-                Padding(
+           Column(
+             children: [
+               Padding(
                   padding: const EdgeInsets.only(right: 10 , left: 10),
                   child: Container(
                     width: double.infinity,
@@ -84,7 +87,11 @@ class ApprovalScreen extends StatelessWidget {
                     ),
                     // clipBehavior: Clip.antiAliasWithSaveLayer,
                     child: MaterialButton(
-                      onPressed: (){} ,
+                      onPressed: (){
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => ConfirmedScreen()));
+
+                      } ,
                       child: Text(
                         'Confirm',
                         textAlign: TextAlign.center,
@@ -96,28 +103,23 @@ class ApprovalScreen extends StatelessWidget {
 
                     ),
                   ),
-                )
+                ),
+             ],
+           ),
 
-              ]
+          SizedBox(
+            height: 20,
           ),
-        ),
+
+        ],
+
+
+
       ),
 
-
     );
-
-
   }
 }
 
 
 
-void MenuPressed(){
-
-  print("hello");
-
-}
-
-void ChangeLanguage(){
-
-}

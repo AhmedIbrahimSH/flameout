@@ -1,22 +1,38 @@
+import 'package:flameout/Screens/RegisterScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:sqflite/sqflite.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+late Database mydatabase;
+
+class _LoginScreenState extends State<LoginScreen> {
   // This widget is the root of your application.
+  bool _obscureText = true;
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    CreateDatabase();
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading: Icon(
-            Icons.menu,
-          ),
+
           title: Text("FlameOut"),
+          centerTitle: true,
           actions: [
             IconButton(onPressed: (){}, icon: Icon(Icons.notification_important)),
-            IconButton(onPressed: MenuPressed, icon:Icon(Icons.question_mark_rounded)),
 
           ],
-          backgroundColor: Colors.redAccent,
+          backgroundColor: Colors.red,
 
         ),
         body: Padding(
@@ -28,7 +44,7 @@ class LoginScreen extends StatelessWidget {
 
                     Center(
                       child: Text(
-                        'Fire extinguisher recycler' ,
+                        'Fire Extinguisher Recycler' ,
                         style: TextStyle(
 
                           fontSize: 20,
@@ -59,17 +75,27 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(
                       height: 20,
                     ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                          labelText: 'Password',
-                          prefixIcon: Icon(
-                            Icons.lock,
-                          ),
-                          suffixIcon: Icon(
-                            Icons.remove_red_eye,
-                          )
-                      ),
+              TextField(
+                obscureText: _obscureText,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  hintText: 'Enter your password',
+                  prefixIcon: Icon(
+                    Icons.lock,
+                  ),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscureText ? Icons.visibility : Icons.visibility_off,
+                      color: Colors.grey,
                     ),
+                    onPressed: () {
+                      setState(() {
+                        _obscureText = !_obscureText;
+                      });
+                    },
+                  ),
+              ),
+            ),
                     SizedBox(
 
                       height: 50,
@@ -122,7 +148,10 @@ class LoginScreen extends StatelessWidget {
                       ),
                       // clipBehavior: Clip.antiAliasWithSaveLayer,
                       child: MaterialButton(
-                        onPressed: (){} ,
+                        onPressed: (){
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => RegisterScreen()));
+                        } ,
                         child: Text(
                           'Register a new account ',
                           textAlign: TextAlign.center,
@@ -152,12 +181,55 @@ class LoginScreen extends StatelessWidget {
 
 
 
-void MenuPressed(){
 
-  print("hello");
 
+void CreateDatabase() async{
+    mydatabase = await openDatabase(
+        'myDB',
+        version : 1,
+      onCreate : (database,version) async {
+        print('databasecreated');
+
+        await database.execute('CREATE TABLE user (email TEXT PRIMARY KEY , name TEXT , password TEXT)').then((value){
+            print('databaseexecuted');
+
+          });
+        await database.execute('CREATE TABLE order (id TEXT PRIMARY KEY , number INTEGER , name TEXT)').then((value){
+          print('seconddatabaseexecuted');
+
+        });
+      print('finished');
+
+        },
+      onOpen: (database){
+
+      }
+    );
 }
 
-void ChangeLanguage(){
+Future InsertIntoDatabase( {
+  required String email,
+  required String name,
+  required String password,
+
+})
+
+async {
+  try {
+    return await mydatabase.transaction((txn) async {
+      await txn.rawInsert(
+        'INSERT INTO user(email, name, password) VALUES ($email, $name , $password)',
+        ['example.com', 'ahmed', '123456'],
+      );
+      print('INSERTED SUCCESSFULLY');
+    });
+  } catch (e) {
+    print('Error inserting data into database: $e');
+    // Handle the error here, such as displaying an error message to the user
+  }
+}
+
+
+void GetFromDatabase(){
 
 }

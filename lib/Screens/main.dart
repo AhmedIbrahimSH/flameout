@@ -1,4 +1,6 @@
 import 'package:flameout/Screens/ApprovalScreen.dart';
+import 'package:flameout/Screens/ConfirmedScreen.dart';
+import 'package:flameout/Screens/RegisterScreen.dart';
 import 'package:flutter/material.dart';
 
 import 'LoginScreen.dart';
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return MaterialApp(
-      home: LoginScreen(),
+      home: ConfirmedScreen(),
     );
 
   }
