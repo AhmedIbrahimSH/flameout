@@ -1,25 +1,80 @@
 import 'package:flameout/Screens/RegisterScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
+<<<<<<< HEAD
+import 'package:path/path.dart';
+
+import 'FaqPage.dart';
+import 'MainScreen.dart';
 
 class LoginScreen extends StatefulWidget {
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
+
+=======
+
+class LoginScreen extends StatefulWidget {
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+>>>>>>> origin/master
 }
 late Database mydatabase;
 
 class _LoginScreenState extends State<LoginScreen> {
   // This widget is the root of your application.
   bool _obscureText = true;
+<<<<<<< HEAD
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
+  Future<Database> _openDatabase() async {
+    // Get a path to the location for storing the database
+    String databasePath = await getDatabasesPath();
+    String path = join(databasePath, 'myDB.db');
+
+    // Open the database or create it if it doesn't exist
+    Database database = await openDatabase(
+      path,
+      version: 1,
+      onCreate: (db, version) async {
+        // Create the 'users' table
+        await db.execute('CREATE TABLE users ('
+            'email TEXT PRIMARY KEY, '
+            'password TEXT, '
+            'name TEXT'
+            ')');
+
+        // Create the 'clients' table
+        await db.execute('CREATE TABLE clients ('
+            'id INTEGER PRIMARY KEY, '
+            'name TEXT, '
+            'num_of_extinguishers INTEGER, '
+            'cost INTEGER'
+            ')');
+      },
+    );
+
+    return database;
+  }
+=======
+
+>>>>>>> origin/master
 
   @override
   void initState() {
     // TODO: implement initState
+<<<<<<< HEAD
+    //super.initState();
+    createDatabase();
+    insertUser();
+=======
     super.initState();
     CreateDatabase();
 
+>>>>>>> origin/master
   }
   @override
   Widget build(BuildContext context) {
@@ -29,7 +84,15 @@ class _LoginScreenState extends State<LoginScreen> {
           title: Text("FlameOut"),
           centerTitle: true,
           actions: [
+<<<<<<< HEAD
+            IconButton(onPressed: (){
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => FaqPage()));
+            }, icon:Icon(Icons.question_mark_rounded)),
+=======
             IconButton(onPressed: (){}, icon: Icon(Icons.notification_important)),
+>>>>>>> origin/master
 
           ],
           backgroundColor: Colors.red,
@@ -58,6 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 50,
                     ),
                     TextFormField(
+                      controller: _emailController,
                       decoration: InputDecoration(
                         labelText: 'email',
                         prefixIcon: Icon(
@@ -76,6 +140,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 20,
                     ),
               TextField(
+<<<<<<< HEAD
+                controller: _passwordController ,
+=======
+>>>>>>> origin/master
                 obscureText: _obscureText,
                 decoration: InputDecoration(
                   labelText: 'Password',
@@ -103,24 +171,64 @@ class _LoginScreenState extends State<LoginScreen> {
                     Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color : Colors.redAccent,
+                        color : Colors.red,
                         borderRadius: BorderRadius.circular(15),
 
                       ),
                       // clipBehavior: Clip.antiAliasWithSaveLayer,
                       child: MaterialButton(
-                        onPressed: (){} ,
+                        onPressed: () async {
+                          // Get the email and password entered by the user
+                          String email = _emailController.text.trim();
+                          String password = _passwordController.text.trim();
+
+                          // Open the database
+                          Database database = await _openDatabase();
+
+                          // Check if the user with the given email and password exists in the database
+                          List<Map<String, dynamic>> result = await database.rawQuery(
+                            'SELECT * FROM users WHERE email = ? AND password = ?',
+                            [email, password],
+                          );
+
+                          if (result.length > 0) {
+                            // Navigate to the MainScreen widget if the login is successful
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => MainScreen()),
+                            );
+                          } else {
+                            // Display an error message if the login fails
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Error'),
+                                  content: Text('Incorrect email or password.'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: Text('OK'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
+
+                          // Close the database
+                          await database.close();
+                        },
                         child: Text(
-                          'Login',
-                          textAlign: TextAlign.center,
+                            'Login' ,
                           style: TextStyle(
                             fontSize: 20,
-                            color : Colors.white,
                           ),
                         ),
-
-
-                      ),
+                      )
+                      ,
 
                     ),
                     SizedBox(
@@ -157,7 +265,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 20,
-                            color : Colors.white,
                           ),
                         ),
 
@@ -183,6 +290,55 @@ class _LoginScreenState extends State<LoginScreen> {
 
 
 
+<<<<<<< HEAD
+Future<Database> createDatabase() async {
+  // Get a path to the location for storing the database
+  String databasePath = await getDatabasesPath();
+  String path = join(databasePath, 'myDB.db');
+
+  // Open the database or create it if it doesn't exist
+  Database database = await openDatabase(
+    path,
+    version: 1,
+    onCreate: (db, version) async {
+      // Create the 'users' table
+      await db.execute('CREATE TABLE users ('
+          'email TEXT PRIMARY KEY, '
+          'password TEXT, '
+          'name TEXT'
+          ')');
+
+      // Create the 'clients' table
+      await db.execute('CREATE TABLE clients ('
+          'id INTEGER PRIMARY KEY, '
+          'name TEXT, '
+          'num_of_extinguishers INTEGER, '
+          'cost INTEGER'
+          ')');
+    },
+  );
+
+  return database;
+}
+
+Future<void> insertUser() async {
+  // Open the database
+  Database database = await createDatabase();
+
+  // Insert a new user into the 'users' table
+  await database.insert(
+    'users',
+    {
+      'email': 'ahmed@example.com',
+      'password': 'mypass12345',
+      'name': 'Ahmed',
+    },
+    conflictAlgorithm: ConflictAlgorithm.replace,
+  );
+
+  // Close the database
+  await database.close();
+=======
 void CreateDatabase() async{
     mydatabase = await openDatabase(
         'myDB',
@@ -227,6 +383,7 @@ async {
     print('Error inserting data into database: $e');
     // Handle the error here, such as displaying an error message to the user
   }
+>>>>>>> origin/master
 }
 
 

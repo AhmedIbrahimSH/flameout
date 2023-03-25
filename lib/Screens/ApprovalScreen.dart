@@ -74,6 +74,11 @@ class ApprovalScreen extends StatelessWidget {
         ),
 
 
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> origin/master
            Column(
              children: [
                Padding(
@@ -88,8 +93,30 @@ class ApprovalScreen extends StatelessWidget {
                     // clipBehavior: Clip.antiAliasWithSaveLayer,
                     child: MaterialButton(
                       onPressed: (){
+<<<<<<< HEAD
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text("ORDER RECEIVED"),
+                              content: Text("Successfull order ! Check your mail for Order Details"),
+                              actions: <Widget>[
+                                TextButton (
+                                  child: Text("OK"),
+                                  onPressed: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) => ConfirmedScreen()));
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
+
+=======
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => ConfirmedScreen()));
+>>>>>>> origin/master
 
                       } ,
                       child: Text(

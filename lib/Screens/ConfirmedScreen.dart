@@ -18,6 +18,16 @@ class ConfirmedScreen extends StatelessWidget {
 
       appBar: AppBar(
 
+        leading: IconButton(
+          onPressed: (){
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => MainScreen()));
+          },
+          icon: Icon(
+              Icons.chevron_left_outlined,
+          ),
+        ),
+
         title:
         Text(
           'OrderConfirmation',
@@ -65,6 +75,19 @@ class ConfirmedScreen extends StatelessWidget {
 
           ),
 
+
+          SizedBox(
+            height: 50,
+          ),
+          Text(
+            'Check your mail for order details',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+
+          ),
+
           SizedBox(
             height: 50,
           ),
@@ -78,8 +101,10 @@ class ConfirmedScreen extends StatelessWidget {
           ),
 
           SizedBox(
-            height: 150,
+            height: 120,
           ),
+
+
 
 
           Column(
