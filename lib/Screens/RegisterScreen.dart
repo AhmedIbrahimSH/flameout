@@ -101,18 +101,7 @@ class RegisterScreen extends StatelessWidget {
                       // clipBehavior: Clip.antiAliasWithSaveLayer,
                       child: MaterialButton(
                         onPressed: (){
-<<<<<<< HEAD
 
-=======
-                          InsertIntoDatabase(
-                            email : emailController.text,
-                            name : nameController.text,
-                            password: passwordController.text,
-                          ).then((value) {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => MainScreen()));
-                          });
->>>>>>> origin/master
                         } ,
                         child: Text(
                           'Submit',

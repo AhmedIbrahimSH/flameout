@@ -2,10 +2,7 @@ import 'package:flameout/Screens/ApprovalScreen.dart';
 import 'package:flameout/Screens/ConfirmedScreen.dart';
 import 'package:flameout/Screens/LoginScreen.dart';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:flameout/Screens/FaqPage.dart';
-=======
->>>>>>> origin/master
 import 'package:geolocator/geolocator.dart';
 
 class MainScreen extends StatefulWidget {
@@ -20,7 +17,6 @@ class _MainScreenState extends State<MainScreen> {
   int CostPerOne = 100;
   int ShipppingCost = 30;
 
-<<<<<<< HEAD
 
   Position? currentPosition;
 
@@ -39,9 +35,6 @@ class _MainScreenState extends State<MainScreen> {
     currentPosition = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
   }
-=======
-  late Position position;
->>>>>>> origin/master
   late int TotalCost;
   late int res;
   @override
@@ -120,7 +113,6 @@ class _MainScreenState extends State<MainScreen> {
                           setState(() {
                             if(NumeberOfFireExtinguishers < 5)
                               NumeberOfFireExtinguishers++;
-<<<<<<< HEAD
                             else{
                               showDialog(
                                 context: context,
@@ -140,8 +132,6 @@ class _MainScreenState extends State<MainScreen> {
                                 },
                               );
                             }
-=======
->>>>>>> origin/master
 
                           });
                         }
@@ -158,7 +148,6 @@ class _MainScreenState extends State<MainScreen> {
                         ),
                         FloatingActionButton(onPressed: (){
                           setState(() {
-<<<<<<< HEAD
                             if(NumeberOfFireExtinguishers > 1)
                               NumeberOfFireExtinguishers--;
                             else{
@@ -180,10 +169,6 @@ class _MainScreenState extends State<MainScreen> {
                                 },
                               );
                             }
-=======
-                            if(NumeberOfFireExtinguishers > 0)
-                              NumeberOfFireExtinguishers--;
->>>>>>> origin/master
                             print(NumeberOfFireExtinguishers);
                           });
                         },
@@ -200,14 +185,10 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                   ),
                   SizedBox(
-<<<<<<< HEAD
                     height: 50,
                   ),
                   SizedBox(
                     height: 50,
-=======
-                    height: 100,
->>>>>>> origin/master
                   ),
 
 
@@ -228,15 +209,7 @@ class _MainScreenState extends State<MainScreen> {
                       // clipBehavior: Clip.antiAliasWithSaveLayer,
                       child: MaterialButton(
                         onPressed: () async {
-<<<<<<< HEAD
                           getLocation();
-=======
-                          position = await Geolocator.getCurrentPosition(
-                            desiredAccuracy: LocationAccuracy.high,
-
-                          );
-                          print('ahmed');
->>>>>>> origin/master
 
                         } ,
                         child: Text(

@@ -1,7 +1,6 @@
 import 'package:flameout/Screens/RegisterScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
-<<<<<<< HEAD
 import 'package:path/path.dart';
 
 import 'FaqPage.dart';
@@ -12,20 +11,12 @@ class LoginScreen extends StatefulWidget {
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 
-=======
-
-class LoginScreen extends StatefulWidget {
-
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
->>>>>>> origin/master
 }
 late Database mydatabase;
 
 class _LoginScreenState extends State<LoginScreen> {
   // This widget is the root of your application.
   bool _obscureText = true;
-<<<<<<< HEAD
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -59,22 +50,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return database;
   }
-=======
-
->>>>>>> origin/master
 
   @override
   void initState() {
     // TODO: implement initState
-<<<<<<< HEAD
     //super.initState();
     createDatabase();
     insertUser();
-=======
-    super.initState();
-    CreateDatabase();
-
->>>>>>> origin/master
   }
   @override
   Widget build(BuildContext context) {
@@ -84,15 +66,11 @@ class _LoginScreenState extends State<LoginScreen> {
           title: Text("FlameOut"),
           centerTitle: true,
           actions: [
-<<<<<<< HEAD
             IconButton(onPressed: (){
               Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => FaqPage()));
             }, icon:Icon(Icons.question_mark_rounded)),
-=======
-            IconButton(onPressed: (){}, icon: Icon(Icons.notification_important)),
->>>>>>> origin/master
 
           ],
           backgroundColor: Colors.red,
@@ -140,10 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 20,
                     ),
               TextField(
-<<<<<<< HEAD
                 controller: _passwordController ,
-=======
->>>>>>> origin/master
                 obscureText: _obscureText,
                 decoration: InputDecoration(
                   labelText: 'Password',
@@ -290,7 +265,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
 
 
-<<<<<<< HEAD
 Future<Database> createDatabase() async {
   // Get a path to the location for storing the database
   String databasePath = await getDatabasesPath();
@@ -338,52 +312,6 @@ Future<void> insertUser() async {
 
   // Close the database
   await database.close();
-=======
-void CreateDatabase() async{
-    mydatabase = await openDatabase(
-        'myDB',
-        version : 1,
-      onCreate : (database,version) async {
-        print('databasecreated');
-
-        await database.execute('CREATE TABLE user (email TEXT PRIMARY KEY , name TEXT , password TEXT)').then((value){
-            print('databaseexecuted');
-
-          });
-        await database.execute('CREATE TABLE order (id TEXT PRIMARY KEY , number INTEGER , name TEXT)').then((value){
-          print('seconddatabaseexecuted');
-
-        });
-      print('finished');
-
-        },
-      onOpen: (database){
-
-      }
-    );
-}
-
-Future InsertIntoDatabase( {
-  required String email,
-  required String name,
-  required String password,
-
-})
-
-async {
-  try {
-    return await mydatabase.transaction((txn) async {
-      await txn.rawInsert(
-        'INSERT INTO user(email, name, password) VALUES ($email, $name , $password)',
-        ['example.com', 'ahmed', '123456'],
-      );
-      print('INSERTED SUCCESSFULLY');
-    });
-  } catch (e) {
-    print('Error inserting data into database: $e');
-    // Handle the error here, such as displaying an error message to the user
-  }
->>>>>>> origin/master
 }
 
 

@@ -74,11 +74,8 @@ class ApprovalScreen extends StatelessWidget {
         ),
 
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> origin/master
            Column(
              children: [
                Padding(
@@ -93,7 +90,6 @@ class ApprovalScreen extends StatelessWidget {
                     // clipBehavior: Clip.antiAliasWithSaveLayer,
                     child: MaterialButton(
                       onPressed: (){
-<<<<<<< HEAD
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
@@ -113,10 +109,6 @@ class ApprovalScreen extends StatelessWidget {
                           },
                         );
 
-=======
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => ConfirmedScreen()));
->>>>>>> origin/master
 
                       } ,
                       child: Text(
