@@ -62,7 +62,15 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-
+          leading: IconButton(
+            onPressed: (){
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()));
+            },
+            icon: Icon(
+              Icons.chevron_left_outlined,
+            ),
+          ),
           title: Text("FlameOut"),
           centerTitle: true,
           actions: [
