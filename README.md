@@ -32,7 +32,10 @@ The challenge aims to help in contributing to the 17 goals set by the United Nat
 - Goal 15: Life on Land - Improperly disposed of fire extinguishers can harm wildlife and their habitats. Recycling them can prevent this damage.
 
 - Goal 16: Peace, Justice and Strong Institutions - Recycling fire extinguishers can be part of a comprehensive waste management system that supports strong institutions and promotes sustainable practices.
-
+ 
+## To open the project
+- I was using Android Studio for this project and the app is completely made of Flutter 
+- Note : You have to include the SQflite dependecy [sqflite: ^2.2.6] in the pubspec.yaml file below [dependencies:]  "Don't include the brackets"
 
 ## Contact me
 
